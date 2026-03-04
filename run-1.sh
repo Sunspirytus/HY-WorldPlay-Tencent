@@ -14,8 +14,8 @@ MODEL_PATH=./models/tencent---HunyuanVideo-1.5                   # Path to pretr
 AR_ACTION_MODEL_PATH=./models/tencent---HY-WorldPlay/ar_model/diffusion_pytorch_model.safetensors         # Path to our HY-World 1.5 autoregressive checkpoints
 BI_ACTION_MODEL_PATH=         # Path to our HY-World 1.5 bidirectional checkpoints
 AR_DISTILL_ACTION_MODEL_PATH=./models/tencent---HY-WorldPlay/ar_distilled_action_model/diffusion_pytorch_model.safetensors # Path to our HY-World 1.5 autoregressive distilled checkpoints
-POSE='w-31'                   # Camera trajectory: pose string (e.g., 'w-31' means generating [1 + 31] latents) or JSON file path
-NUM_FRAMES=125
+POSE='right-63'
+NUM_FRAMES=253
 WIDTH=832
 HEIGHT=480
 

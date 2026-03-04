@@ -39,7 +39,7 @@ def download_hy_worldplay():
     print("[1/6] Downloading tencent/HY-WorldPlay...")
     print("=" * 60)
 
-    worldplay_path = snapshot_download("tencent/HY-WorldPlay")
+    worldplay_path = snapshot_download("tencent/HY-WorldPlay", local_dir='./models/tencent---HY-WorldPlay')
     print(f"Downloaded to: {worldplay_path}")
 
     # Fix: Rename model.safetensors to diffusion_pytorch_model.safetensors
@@ -68,7 +68,7 @@ def download_hunyuan_video():
 
     hunyuan_path = snapshot_download(
         "tencent/HunyuanVideo-1.5",
-        allow_patterns=["vae/*", "scheduler/*", "transformer/480p_i2v/*"],
+        allow_patterns=["vae/*", "scheduler/*", "transformer/480p_i2v/*"], local_dir='./models/tencent---HunyuanVideo-1.5'
     )
     print(f"Downloaded to: {hunyuan_path}")
     return hunyuan_path
@@ -102,7 +102,7 @@ def download_llm_text_encoder(hunyuan_path):
         shutil.rmtree(llm_target)
 
     print("Downloading Qwen/Qwen2.5-VL-7B-Instruct (~15GB)...")
-    qwen_cache = snapshot_download("Qwen/Qwen2.5-VL-7B-Instruct")
+    qwen_cache = snapshot_download("Qwen/Qwen2.5-VL-7B-Instruct", local_dir='./models/Qwen---Qwen2.5-VL-7B-Instruct')
 
     # Copy files (resolve symlinks)
     os.makedirs(llm_target, exist_ok=True)
@@ -144,7 +144,7 @@ def download_byt5_encoders(hunyuan_path):
             shutil.rmtree(byt5_target)
 
         print("Downloading google/byt5-small...")
-        byt5_cache = snapshot_download("google/byt5-small")
+        byt5_cache = snapshot_download("google/byt5-small", local_dir='./models/google---byt5-small')
 
         os.makedirs(byt5_target, exist_ok=True)
         for item in os.listdir(byt5_cache):
@@ -168,7 +168,7 @@ def download_byt5_encoders(hunyuan_path):
 
         print("Downloading AI-ModelScope/Glyph-SDXL-v2 from ModelScope...")
         glyph_cache = ms_snapshot_download(
-            "AI-ModelScope/Glyph-SDXL-v2", cache_dir="/tmp/glyph_cache"
+            "AI-ModelScope/Glyph-SDXL-v2", cache_dir="/tmp/glyph_cache", local_dir='./models/AI-ModelScope---Glyph-SDXL-v2'
         )
 
         os.makedirs(glyph_target, exist_ok=True)
@@ -223,7 +223,7 @@ def download_vision_encoder(hunyuan_path, hf_token):
     print("Downloading black-forest-labs/FLUX.1-Redux-dev...")
     try:
         flux_cache = snapshot_download(
-            "black-forest-labs/FLUX.1-Redux-dev", token=hf_token
+            "black-forest-labs/FLUX.1-Redux-dev", token=hf_token, local_dir='./models/black-forest-labs---FLUX.1-Redux-dev'
         )
 
         # Copy files (resolve symlinks)
@@ -251,8 +251,8 @@ def print_paths():
     print("[6/6] Verifying downloads...")
     print("=" * 60)
 
-    hunyuan_path = snapshot_download("tencent/HunyuanVideo-1.5", local_files_only=True)
-    worldplay_path = snapshot_download("tencent/HY-WorldPlay", local_files_only=True)
+    hunyuan_path = snapshot_download("tencent/HunyuanVideo-1.5", local_files_only=True, local_dir='./models/tencent---HunyuanVideo-1.5')
+    worldplay_path = snapshot_download("tencent/HY-WorldPlay", local_files_only=True, local_dir='./models/tencent---HY-WorldPlay')
 
     print("\n" + "=" * 60)
     print("ALL DOWNLOADS COMPLETE!")

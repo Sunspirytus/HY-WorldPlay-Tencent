@@ -1072,6 +1072,11 @@ class HunyuanVideo_1_5_Pipeline(DiffusionPipeline):
         selected_frame_indices = []
 
         for chunk_i in range(self.chunk_num):
+            if get_rank() == 0:
+                print(
+                    f"Generating chunk {chunk_i} / {self.chunk_num} with {self.chunk_latent_frames} frames"
+                )
+
             if chunk_i > 0:
                 current_frame_idx = (
                     chunk_i * self.chunk_latent_frames
@@ -1084,7 +1089,7 @@ class HunyuanVideo_1_5_Pipeline(DiffusionPipeline):
                     selected_history_frame_id = select_aligned_memory_frames(
                         viewmats[0].cpu().detach().numpy(),
                         chunk_start_idx,
-                        memory_frames=20,
+                        memory_frames=16,
                         temporal_context_size=12,
                         pred_latent_size=4,
                         points_local=self.points_local,
@@ -1807,6 +1812,7 @@ class HunyuanVideo_1_5_Pipeline(DiffusionPipeline):
         latent_frames = latents.shape[2]
         self.points_local = generate_points_in_sphere(50000, 8.0).to(device)
         self.chunk_num = latent_frames // chunk_latent_frames
+        print(f"chunk_num: {self.chunk_num}")
         self.chunk_latent_frames = chunk_latent_frames
         self.num_inference_steps = num_inference_steps
 

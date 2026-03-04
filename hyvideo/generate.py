@@ -29,6 +29,9 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import VideoFileClip, VideoClip
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from hyvideo.pipelines.worldplay_video_pipeline import HunyuanVideo_1_5_Pipeline
 from hyvideo.commons.parallel_states import initialize_parallel_state
