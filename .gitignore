@@ -167,5 +167,6 @@ cache/
 ckpts/
 models/
 millitary_assets/
+data/
 
 hyvideo/utils/rewrite/i2v_env.sh

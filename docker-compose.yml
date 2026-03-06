@@ -1,0 +1,20 @@
+services:
+  hy-worldplay-infer:
+    image: sunspirytus/hy-worldplay-infer:latest
+    container_name: hy-worldplay-infer
+    volumes:
+      - ./models:/app/models
+      #- ./ui:/app/ui
+      - ./data:/app/data
+    shm_size: 500g
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              #device_ids: ['6', '7']
+              capabilities: [gpu]
+    ports:
+      - "7860:7860"
+
